@@ -1,0 +1,14 @@
+(fun 
+  (<pattern> -> <body>)
+  ...
+  (<pattern> -> <body>))
+
+// a lambda function  
+(<pattern> -> <body>)
+
+// would be fun if all functions were curried
+
+(def <symbol> <body>)
+
+(def add-1 (+ 1))
+
