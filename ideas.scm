@@ -30,5 +30,7 @@
 ((add''))
 
 (define 
+  (call-applied-function f)
+    ((f)))
 
 
