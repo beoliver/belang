@@ -40,6 +40,35 @@ begin
 
 
   
+def f 
+  fun ('hello 13) "wowowowow"
+    | ('what x) (+ x x)
+    | ('bye reason) 
+          begin display "time to say good bye" >
+                newline >
+                display reason .
+
+
+(def f
+     (fun (('hello 13) "wowowowow")
+	  (('what x) (+ x x))
+	  (('bye reason) (begin 
+			   (display "time to say good bye")
+			   (newline)
+			   (display reason)))))
+
+
+(define f
+  (lambda (a b)
+    (cond ((and (eq? a 'hello)
+		(eq? b 12)) "wowowowow")
+	  ((eq? a 'what)
+	   (let ((x b)) (+ x x)))
+	  ((eq? a 'bye)
+	   (let ((reason b)) (begin
+			       (display "time to say good bye")
+			       (newline)
+			       (display reason)))))))
   
 
 
