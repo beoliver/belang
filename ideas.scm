@@ -33,7 +33,19 @@
   (call-applied-function f)
     ((f)))
 
+// prolog|erlang style pattern matching?
 
+(def factorial
+  (0 -> 1)
+  (N -> (* N (factorial (- N 1)))))
+
+(def cons
+  (X Y ->
+    (SELECTOR -> (SELECTOR X Y))))
+
+(def car
+  (CELL ->
+    (CELL (X Y -> X))))
 
 
 
