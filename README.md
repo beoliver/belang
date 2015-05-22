@@ -12,11 +12,12 @@ The current implementation stands at about 200 loc and allows for:
 
 for example
 
-`?> (define foo`                                                                      
-      `(fun (x 1 -> "one")`
-           `(x 2 -> "two")`
-           `(x n -> n)))`
-`#{Unspecific}`
+```
+?> (define foo
+      (fun (x 1 -> "one")
+           (x 2 -> "two")
+           (x n -> n)))
+#{Unspecific}```
 
 ?> (define bar (foo 100))                                                              
 #{Unspecific}                                                                           
