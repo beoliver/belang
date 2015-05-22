@@ -17,7 +17,7 @@ for example
       (fun (x 1 -> "one")
            (x 2 -> "two")
            (x n -> n)))
-#{Unspecific}```
+#{Unspecific}
 
 ?> (define bar (foo 100))                                                              
 #{Unspecific}                                                                           
