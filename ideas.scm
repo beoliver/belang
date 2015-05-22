@@ -31,6 +31,18 @@
          (parsed-clauses (map (lambda (clause) (parse-fun-clause (list) clause)) clauses)))
     (sf-guard (cons 'guard parsed-clauses)))) ;; now eval and convert to lambdas
 
+
+;; we will also alow for named lambdas
+;; is there a nicer way of calling a lambda 
+
+((fun (x) -> x) 1)
+
+(fun (x) -> x) 1
+
+
+
+
+
 // a lambda function  
 (<pattern> -> <body>)
 
