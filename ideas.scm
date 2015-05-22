@@ -29,7 +29,7 @@
 (define (sf-fun x)
   (let* ((clauses (cdr x))
          (parsed-clauses (map (lambda (clause) (parse-fun-clause (list) clause)) clauses)))
-    (cons 'guard parsed-clauses))) ;; now eval and convert to lambdas
+    (sf-guard (cons 'guard parsed-clauses)))) ;; now eval and convert to lambdas
 
 // a lambda function  
 (<pattern> -> <body>)
