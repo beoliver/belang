@@ -2,6 +2,24 @@
   (<pattern> -> <body>)
   ...
   (<pattern> -> <body>))
+  
+;; currently
+
+(guard
+  (<pattern> <body>)
+  ...
+  (<pattern> <body>))
+  
+(guard 
+  ((x y 10) (+ x y))
+  ((x y 20) (display "twenty") (* x y)))
+  
+(define (parse-fun head body)
+  (if (eq? (car body) '->)
+    (cons (reverse head) (cdr body))
+    (parse-fun (cons (car body) head) (cdr body))))
+    
+  
 
 // a lambda function  
 (<pattern> -> <body>)
