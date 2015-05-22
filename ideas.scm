@@ -39,6 +39,18 @@
 
 (fun (x) -> x) 1
 
+(define example
+  '(lambda (n)
+     (display n) 
+     (newline)
+     (if (not (= n 0))
+	 (this (- n 1)))))
+	 
+(define (sf-lambda lambda-exp env)
+  (let* ((this-env (cons '() env))
+	 (this-closure (list 'closure (cadr lambda-exp) (cddr lambda-exp) this-env)))
+    (set-car! this-env (cons (cons 'this this-closure) (car this-env)))
+    this-closure))
 
 
 
