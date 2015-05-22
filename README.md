@@ -2,8 +2,6 @@
 
 belang is currently built on top of a 'meta circular evaluator' in scheme. 
 
-It is an exploration of how far one can push a 'lisp' before it is unreconisable (and suddenly a lot harder to parse)
-
 The current implementation stands at about 200 loc and allows for:
 
 1. curried procedures
@@ -24,3 +22,19 @@ for example
 
 ?> (bar 2)                                                                             
 two
+
+```
+
+annonymous recursion. At the moment it looks like this:
+
+```
+ ?> ((lambda* (n)
+	      (if (= 0 n)
+	        "finished"
+		  (this (- n 1))))
+     10)
+finished
+
+```
+Which works by storing a ref to 'this' in every unique lamnda environment.
+Ideally it would allow for pattern matching against the recursive calls, 
