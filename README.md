@@ -25,6 +25,21 @@ two
 
 ```
 
+named recursion
+
+```
+ ?> (define baz 
+      (fun (0 -> (display "the end"))
+	   (n -> (display n) (newline) (baz (- n 1)))))
+#{Unspecific}
+ ?> (baz 5)
+5
+4
+3
+2
+1
+the end#{Unspecific}
+ ```
 annonymous recursion. At the moment it looks like this:
 
 ```
