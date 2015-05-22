@@ -30,7 +30,9 @@ named recursion
 ```
  ?> (define baz
       (fun (0 -> (display "the end"))
-           (n -> (display n) (newline) (baz (- n 1)))))
+           (n -> (display n) 
+                 (newline) 
+                 (baz (- n 1)))))
            
 #{Unspecific}
  ?> (baz 5)
