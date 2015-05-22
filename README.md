@@ -28,8 +28,10 @@ two
 named recursion
 
 ```
- ?> (define baz(fun (0 -> (display "the end"))
-	   (n -> (display n) (newline) (baz (- n 1)))))
+ ?> (define baz
+      (fun (0 -> (display "the end"))
+           (n -> (display n) (newline) (baz (- n 1)))))
+           
 #{Unspecific}
  ?> (baz 5)
 5
@@ -43,9 +45,9 @@ annonymous recursion. At the moment it looks like this:
 
 ```
  ?> ((lambda* (n)
-	      (if (= 0 n)
-	        "finished"
-		  (this (- n 1))))
+      (if (= 0 n)
+        "finished"
+        (this (- n 1))))
      10)
 finished
 
