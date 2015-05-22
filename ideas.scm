@@ -14,12 +14,22 @@
   ((x y 10) (+ x y))
   ((x y 20) (display "twenty") (* x y)))
   
-(define (parse-fun head body)
+;; this will become...  
+  
+(fun 
+  (x y 10 -> (+ x y))
+  (x y 20 -> (display "twenty") (* x y)))
+  
+
+(define (parse-fun-clause head body)
   (if (eq? (car body) '->)
     (cons (reverse head) (cdr body))
-    (parse-fun (cons (car body) head) (cdr body))))
-    
-  
+    (parse-fun-clause (cons (car body) head) (cdr body))))
+
+(define (sf-fun x)
+  (let* ((clauses (cdr x))
+         (parsed-clauses (map (lambda (clause) (parse-fun-clause (list) clause)) clauses)))
+    (cons 'guard parsed-clauses))) ;; now eval and convert to lambdas
 
 // a lambda function  
 (<pattern> -> <body>)
