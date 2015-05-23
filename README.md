@@ -43,16 +43,18 @@ named recursion
 1
 the end#{Unspecific}
 ```
-annonymous recursion. At the moment it looks like this:
+annonymous recursion. 
 
 ```
- ?> ((lambda* (n)
-      (if (= 0 n)
-        "finished"
-        (this (- n 1))))
-     10)
-finished
+ ?> ((fun (0 -> (display "the end"))
+          (n -> (display n)
+                (newline)
+                (loop (- n 1)))) 5)
 
+5
+4
+3
+2
+1
+the end#{Unspecific}
 ```
-Which works by storing a ref to 'this' in every unique lamnda environment.
-Ideally it would allow for pattern matching against the recursive calls, 
