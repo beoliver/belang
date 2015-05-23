@@ -58,3 +58,16 @@ annonymous recursion.
 1
 the end#{Unspecific}
 ```
+
+it is also possible for the user to define a expressions that work like 'case' statements:
+
+```
+?> ((fun (x ->
+       ((fun (#t -> (+ x x))
+	       (#f -> (- x x))) (= x 5)))) 6)
+0
+?> ((fun (x ->
+	 ((fun (#t -> (+ x x))
+	       (#f -> (- x x))) (= x 5)))) 5)
+10
+```
