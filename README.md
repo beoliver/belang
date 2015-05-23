@@ -63,9 +63,10 @@ it is also possible for the user to define a expressions that work like 'case' s
 
 ```
 ?> ((fun (x ->
-       ((fun (#t -> (+ x x))
+	 ((fun (#t -> (+ x x))
 	       (#f -> (- x x))) (= x 5)))) 6)
 0
+
 ?> ((fun (x ->
 	 ((fun (#t -> (+ x x))
 	       (#f -> (- x x))) (= x 5)))) 5)
