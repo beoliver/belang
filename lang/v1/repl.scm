@@ -1,7 +1,3 @@
-;;; base file v1
-;;; after loading this file
-;;; type (repl)
-
 (define primitives
   ;; loaded as the first frame of the environment
   `((eq? . ,eq?) (= . ,=) (+ . ,+) (- . ,-) (* . ,*)
@@ -22,13 +18,17 @@
 	(set-car! env (cons (cons k v) (car env))))))
 
 ;; ----------------------------------------------------------------
-
+;; ----------------------------------------------------------------
 (define (sf-define sf env)
   (let ((var (cadr sf))
 	(val (caddr sf)))
     (define-var! var (meta-eval val env) env)))
-
 ;; ----------------------------------------------------------------
+
+;; ((fun (0 -> (display 0))
+;;       (n -> (display n)
+;;             (newline)
+;;             (loop (- n 1)))) 10)
 
 (define (make-fun/n exp env)
   ;; define some helpers...
@@ -67,6 +67,7 @@
       (make-fun/n exp env)))
 
 ;; ----------------------------------------------------------------
+;; ----------------------------------------------------------------
 
 (define (tagged? tag xs)
   (and (list? xs)
@@ -84,6 +85,7 @@
 
 (define (callable? x)
   (tagged? 'callable x))
+
 
 (define (fun-exp? x)
   ;; internal representation of lambdas
@@ -104,6 +106,7 @@
   (let ((special-form (cdr (assoc (car exp) special-forms))))
     (special-form exp env)))
 
+;; ----------------------------------------------------------------
 ;; ----------------------------------------------------------------	 
 
 (define (meta-eval x env)
@@ -179,6 +182,7 @@
 	     (else `(<fun-branch> ,params ,body ,(cons new-frame env))))))))
 
 ;; ----------------------------------------------------------------
+;; ----------------------------------------------------------------
 
 (define (repl)
   (display "\n beLANG> ")
@@ -187,7 +191,10 @@
 	(case (car x)
 	  ((<fun>) (display '<fun>))
 	  ((<clause> (display '<clause>))))
-	(display x))
+	(if 
+	 (self-evaluating? x)	  
+	 (display x)
+	 (display "")))
     (repl)))
 
 ;; ----------------------------------------------------------------	 
@@ -195,3 +202,5 @@
 (define global-env (list '() primitives))
 
 ;; ----------------------------------------------------------------	 
+
+(repl)
