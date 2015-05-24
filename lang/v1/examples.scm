@@ -31,4 +31,16 @@
           (infiniteB)))
 
 
+;; for numbers from 10 to 0 
+;; print '<number> is even" when even.
+
+((fun (0 -> (display "0 is even")) ; base case
+      (n -> ((fun (0 -> (display n) ; modulo n 2 == 0
+                        (display " is even")
+                        (newline))
+                  (_ -> (display ""))) (modulo n 2))
+            (loop (- n 1)))) 
+ 10)
+
+
 
