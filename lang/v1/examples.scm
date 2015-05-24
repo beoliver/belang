@@ -2,7 +2,7 @@
 (define foo
   (fun (x -> 
     ((fun -> (display x)
-             (newline)))))))
+             (newline))))))
 
 (define bar
   (fun (x ->
