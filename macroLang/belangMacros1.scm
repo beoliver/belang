@@ -6,6 +6,13 @@
 	    (arity (length (car (car branches)))))
        (curry-fun arity branches)))))
 
+(define (parse-branch exp)
+  (define (loop params rest)    
+    (if (eq? (car rest) '->)
+      (cons (reverse params) (cdr rest))
+      (loop (cons (car rest) params) (cdr rest))))
+  (loop '() exp))
+
 (define (curry-fun arity unevaluated)
   (define (loop passed arity)
     (lambda args
