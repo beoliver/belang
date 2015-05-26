@@ -1,7 +1,7 @@
 ;; problems with eval, but in theory we can make the trnasformations
 ;; see bottom of file for examples
 
-(define-syntax fun*
+(define-syntax fun
   (syntax-rules ()
     ((_ branch ...)
      (let* ((branches (map parse-branch `(branch ...)))
@@ -89,22 +89,40 @@
 
 
 (define foo
-  (fun* (() -> '())
-	((x . xs) -> (foo xs))))
+  (fun (() -> '())
+       ((x . xs) -> (foo xs))))
 
 (define bar
-  (fun* (0 n -> 0)
-	(m n -> (+ m n))))
+  (fun (0 n -> 0)
+       (m n -> (+ m n))))
 
 
 (define baz1 
-  (fun* ('foo () xs -> "three")))
+  (fun ('foo () xs -> "three")))
 
 
 (define baz2 
-  (fun* ('foo (x . xs) ys -> "three")))
+  (fun ('foo (x . xs) ys -> "three")))
 
 
 (define test1
-  (fun* ((f . xs) -> (apply f xs))))
+  (fun ((f . xs) -> (apply f xs))))
 
+
+(define works-fine
+  (fun (1 x y -> (+ x y))
+       (2 x y -> (* x y))
+       (_ x y -> "something else")))
+
+(eval ((works-fine 1) 2 3) (null-environment 5))
+(eval ((works-fine 2) 2 3) (null-environment 5))
+(eval ((works-fine #t) 2 3) (null-environment 5))
+
+
+
+(eval (foo '()) (null-environment 5)) ;; fine
+;; ()
+(eval (foo '(1)) (null-environment 5)) ;; nope
+;; assertion-violation: undefined variable [global]
+;;                      foo
+;;                      r5rs
