@@ -11,7 +11,9 @@
     (lambda args
       (let ((arity (- arity (length args)))
             (args (append passed args)))
-        (if (<= arity 0) (evaluate-fun-branches unevaluated args) (loop args arity)))))
+        (if (<= arity 0) 
+          (evaluate-fun-branches unevaluated args) 
+          (loop args arity)))))
   (loop '() arity))
 
 (define (evaluate-fun-branches branches args)
