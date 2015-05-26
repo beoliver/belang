@@ -47,3 +47,8 @@
           (if (valid-match matched)
             (return matched)))) branches)
             'error-in-match)))
+
+(define (valid-match xs)
+  (for-each (lambda (x)
+    (not (eq? x #f))) xs))
+
