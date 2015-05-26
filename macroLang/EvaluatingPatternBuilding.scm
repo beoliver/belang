@@ -1,3 +1,5 @@
+;; problems with eval, but in theory we can make the trnasformations
+;; see bottom of file for examples
 
 (define-syntax fun*
   (syntax-rules ()
@@ -78,7 +80,7 @@
   ;; xs can be dotted, ys can not
   (cond ((and (null? xs)  (null? ys)) (list)) ;; end of the lists
 	((and (null? xs) (not (null? ys))) (list #f))
-	((not (pair? xs)) (cons (cons xs ys) (list)))
+	((not (pair? xs)) (cons (cons xs (cons 'list ys)) (list)))
 	(else (let ((x (car xs))
 		    (y (car ys)))
 		(append (match-elem x y) (list-binder (cdr xs) (cdr ys)))))))
@@ -86,10 +88,9 @@
 ;; -------------------------------------------------------
 
 
-
 (define foo
-  (fun* (() -> ())
-	((x . xs) -> (cons x (foo xs)))))
+  (fun* (() -> '())
+	((x . xs) -> (foo xs))))
 
 (define bar
   (fun* (0 n -> 0)
@@ -104,9 +105,6 @@
   (fun* ('foo (x . xs) ys -> "three")))
 
 
-
-
-
-
-
+(define test1
+  (fun* ((f . xs) -> (apply f xs))))
 
