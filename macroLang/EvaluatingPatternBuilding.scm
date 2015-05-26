@@ -126,3 +126,11 @@
 ;; assertion-violation: undefined variable [global]
 ;;                      foo
 ;;                      r5rs
+
+
+(define works-fine-as-well
+  (fun ((a b c . rest) -> (map (lambda (x) (+ x (+ a b c))) rest))
+       (() -> 0)))
+
+(eval (works-fine-as-well '(1 2 3 4 5 6 7 8 9)) (null-environment 5))
+;; (10 11 12 13 14 15)
