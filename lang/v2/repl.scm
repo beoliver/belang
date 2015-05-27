@@ -2,7 +2,9 @@
 
 (define primitives
   `((list . ,list)
+    (+ . ,+)
     (cons . ,cons)
+    (display . ,display)
     (nil  . ,(list))))
 
 (define global-env (list primitives))
@@ -42,7 +44,7 @@
     fun-object))
 
 (define (self-evaluating? x)
-  (or (number? x) (boolean? x)))
+  (or (number? x) (boolean? x) (char? x) (string? x)))
 
 (define (special-form-fun? x)
   (and (list? x) (eq? (car x) 'fun)))
@@ -62,6 +64,7 @@
 (define (curried-fun-env x) (car (cddddr x)))
 
 (define (meta-eval exp env)
+  (display "META EVAL: ") (display exp) (newline)
   (cond ((self-evaluating? exp) exp)
 	;; ((eq? exp 'nil) (apply list '()))
 	((symbol? exp) (cdr (lookup exp env)))
@@ -132,6 +135,7 @@
 	   (args (cadr matched-branch))
 	   (new-frame (map cons params args))
 	   (body (caddr matched-branch)))
+      (display "META-EVAL-SEQUENCE") (newline)
        	 (meta-eval-sequence body (cons new-frame env)))
       
     ;; now need to pattern match against branches
@@ -203,4 +207,3 @@
 	  (else (display x)))
 	(display x))
     (repl)))
-
