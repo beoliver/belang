@@ -59,4 +59,21 @@
 20
 3> (meta-eval 'bar global)
 10
-3> 
+3> (meta-eval '(define foo (+ 1 1)) global)
+(<thunk> + 1 1)
+#{Unspecific}
+3> (meta-eval 'foo global)
+(<thunk> + 1 1)
+3> (meta-eval '(define bar foo) global)
+(<thunk> + 1 1)
+#{Unspecific}
+3> (meta-eval 'bar global)
+(<thunk> + 1 1)
+3> (meta-eval '(define foo 100) global)
+100
+#{Unspecific}
+3> (meta-eval 'bar global)
+(<thunk> + 1 1)
+4> global
+(((bar <thunk> + 1 1) (foo . 100)))
+4> 
